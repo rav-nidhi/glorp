@@ -2,7 +2,17 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 
 class Hello extends StatelessWidget {
-  const Hello({super.key});
+  String tFrom;
+  Hello({super.key, required this.tFrom});
+
+  // List<String> lines = tFrom.split('\n');
+//     for (String line in lines) {
+//       if (line.trim().isEmpty) continue; // Skip empty lines
+//       List<String> parts = line.split('.');
+//       if (parts.length == 3) {
+//         reinforceList.add(ReinforceVocab(parts[0].trim(), parts[1].trim(),parts[2].trim()));
+//       }
+//     }
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +20,7 @@ class Hello extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 186, 229, 179),
       appBar: AppBar(
-        title: const Text("Hello"),
+        title: Text(tFrom),
         surfaceTintColor: const Color.fromARGB(255, 186, 229, 179),
       ),
       body: SingleChildScrollView(
@@ -22,7 +32,7 @@ class Hello extends StatelessWidget {
                   width: 350,
                 )),
             spacer,
-            const Card(
+            Card(
                 clipBehavior: Clip.hardEdge,
                 child: SizedBox(
                     width: 385,
@@ -32,24 +42,24 @@ class Hello extends StatelessWidget {
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Translated: Hola',
-                              style: TextStyle(
+                              tFrom,
+                              style: const TextStyle(
                                   color: Color.fromARGB(255, 0, 0, 0),
                                   fontSize: 20),
                             )),
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'To: Hello',
-                              style: TextStyle(
+                              tFrom,
+                              style: const TextStyle(
                                   color: Color.fromARGB(255, 0, 0, 0),
                                   fontSize: 20),
                             )),
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Time Asked: 10/26/2024 22:46',
-                              style: TextStyle(
+                              tFrom,
+                              style: const TextStyle(
                                   color: Color.fromARGB(255, 0, 0, 0),
                                   fontSize: 20),
                             )),

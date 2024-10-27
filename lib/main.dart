@@ -90,7 +90,7 @@ Widget log(BuildContext context, String i) {
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (_) => const Hello()));
+                context, MaterialPageRoute(builder: (_) => Hello(tFrom: i)));
           },
           child: Padding(
               padding: const EdgeInsets.all(15),
