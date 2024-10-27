@@ -52,7 +52,7 @@ def robot_talk(lang, text):
     # save file
     tts.save(file_name)
     # play file
-    playsound.playsound(r"C:\\Users\\mosim\\Downloads\\hackunt\\audio_data.mp3")
+    playsound.playsound(r"audio_data.mp3")
     # remove file
     os.remove(file_name)
 
