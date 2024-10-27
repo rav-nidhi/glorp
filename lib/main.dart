@@ -78,35 +78,62 @@ class HomePage extends StatelessWidget {
   }
 }
 
-Widget log(BuildContext context, String i) {
-  return Column (
+Widget log(BuildContext context, String translation) {
+  List<String> parts = translation.split(', ');
+  if (parts.length != 3) return Container(); 
+  
+  String transFrom = parts[0].trim();
+  String transTo = parts[1].trim();
+  String date = parts[2].trim();
+
+  return Column(
     children: [
-      const SizedBox(height:10),
+      const SizedBox(height: 10),
       Align(
         alignment: Alignment.center,
         child: Card(
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          splashColor: Colors.blue.withAlpha(30),
-          onTap: () {
-            Navigator.push(
+          clipBehavior: Clip.hardEdge,
+          child: InkWell(
+            splashColor: Colors.blue.withAlpha(30),
+            onTap: () {
+              Navigator.push(
                 context, MaterialPageRoute(builder: (_) => const Hello()));
-          },
-          child: Padding(
+            },
+            child: Padding(
               padding: const EdgeInsets.all(15),
               child: SizedBox(
                 width: 350,
-                child: Text(
-                  i,
-                  style: const TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 20,
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Translated: $transTo',
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      'From: $transFrom',
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      'Date: $date',
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
                 ),
-              )
-            )
-          )
-        ))
-    ]
+              ),
+            ),
+          ),
+        ),
+      ),
+    ],
   );
 }
