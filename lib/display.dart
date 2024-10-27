@@ -8,10 +8,10 @@ class Hello extends StatelessWidget {
   Widget build(BuildContext context) {
     const spacer = SizedBox(height: 30);
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 224, 179, 229),
+      backgroundColor: const Color.fromARGB(255, 186, 229, 179),
       appBar: AppBar(
         title: const Text("Hello"),
-        surfaceTintColor: Color.fromARGB(255, 224, 179, 229),
+        surfaceTintColor: const Color.fromARGB(255, 186, 229, 179),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -21,7 +21,7 @@ class Hello extends StatelessWidget {
                 child: SizedBox(
                   width: 350,
                 )),
-            const SizedBox(height: 250),
+            spacer,
             const Card(
                 clipBehavior: Clip.hardEdge,
                 child: SizedBox(
@@ -60,7 +60,7 @@ class Hello extends StatelessWidget {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 73, 37, 157),
+                  color: const Color.fromARGB(255, 56, 78, 52),
                   borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () {
@@ -70,7 +70,8 @@ class Hello extends StatelessWidget {
                 child: const Text(
                   'Return to Home',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 182, 166, 194), fontSize: 25),
+                      color: const Color.fromARGB(255, 186, 229, 179),
+                      fontSize: 25),
                 ),
               ),
             ),

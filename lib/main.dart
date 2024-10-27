@@ -147,7 +147,7 @@ class HomePage extends StatelessWidget {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 56, 78, 52),
+                  color: const Color.fromARGB(255, 56, 78, 52),
                   borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () {
@@ -157,7 +157,7 @@ class HomePage extends StatelessWidget {
                 child: const Text(
                   'Return to Home',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 182, 166, 194), fontSize: 25),
+                      color: Color.fromARGB(255, 186, 229, 179), fontSize: 25),
                 ),
               ),
             ),
