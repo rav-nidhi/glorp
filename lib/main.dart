@@ -2,20 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:core';
 import 'display.dart';
 
-class Translate {
-  String transFrom;
-  String transTo;
-  String date;
-
-  Translate(this.transFrom, this.transTo, this.date);
-}
-
 List<String> translations = [
-  "Hello, Hola, 10/26/2024",
-  "My name is glorp, Me llamo glorp, 10/26/2024",
-  "What day is it?, Que dia es hoy?, 10/26/2024",
-  "What time is it?, Que hora es?, 10/26/2024",
-  "Goodbye, Adios, 10/26/2024"
+  "Hello, Hola, English, Spanish, 10:43, 10/26/2024",
+  "My name is glorp, Me llamo glorp, English, Spanish, 23:43, 10/26/2024",
+  "What day is it?, Que dia es hoy?, English, Spanish, 9:43, 10/26/2024",
+  "What time is it?, Que hora es?, English, Spanish, 10:56, 10/26/2024",
+  "Goodbye, Adios, English, Spanish, 10:49, 10/26/2024",
+  "It's tea time, Es hora del te, English, Spanish, 10:49, 10/26/2024"
 ];
 
 // Future<void> nextTranslate(List<Translate> translations) async {
@@ -80,11 +73,14 @@ class HomePage extends StatelessWidget {
 
 Widget log(BuildContext context, String translation) {
   List<String> parts = translation.split(', ');
-  if (parts.length != 3) return Container(); 
+  if (parts.length != 6) return Container(); 
   
   String transFrom = parts[0].trim();
   String transTo = parts[1].trim();
-  String date = parts[2].trim();
+  String langFrom = parts[2].trim();
+  String langTo = parts[3].trim();
+  String time = parts[4].trim();
+  String date = parts[5].trim();
 
   return Column(
     children: [
@@ -95,10 +91,6 @@ Widget log(BuildContext context, String translation) {
           clipBehavior: Clip.hardEdge,
           child: InkWell(
             splashColor: Colors.blue.withAlpha(30),
-            onTap: () {
-              Navigator.push(
-                context, MaterialPageRoute(builder: (_) => const Hello()));
-            },
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: SizedBox(
@@ -107,21 +99,21 @@ Widget log(BuildContext context, String translation) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Translated: $transTo',
+                      'Translated ($langTo): $transTo',
                       style: const TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
                         fontSize: 20,
                       ),
                     ),
                     Text(
-                      'From: $transFrom',
+                      'From ($langFrom): $transFrom',
                       style: const TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
                         fontSize: 20,
                       ),
                     ),
                     Text(
-                      'Date: $date',
+                      'Time: $time',
                       style: const TextStyle(
                         color: Color.fromARGB(255, 0, 0, 0),
                         fontSize: 20,
