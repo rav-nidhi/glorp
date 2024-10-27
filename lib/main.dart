@@ -1,39 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'dart:core';
-import 'display.dart';
 
-List<String> translations = [
-  "Hello, Hola, English, Spanish, 10:43, 10/26/2024",
-  "My name is glorp, Me llamo glorp, English, Spanish, 23:43, 10/26/2024",
-  "What day is it?, Que dia es hoy?, English, Spanish, 9:43, 10/26/2024",
-  "What time is it?, Que hora es?, English, Spanish, 10:56, 10/26/2024",
-  "Goodbye, Adios, English, Spanish, 10:49, 10/26/2024",
-  "It's tea time, Es hora del te, English, Spanish, 10:49, 10/26/2024"
+List<Map<String, String>> translations = [
+  {"transFrom": "Hello", "transTo": "Hola", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-26 23:43:16"},
+  {"transFrom": "My name is glorp", "transTo": "Me llamo glorp", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-26 10:43:25"},
+  {"transFrom": "What day is it?", "transTo": "Que dia es hoy?", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-26 09:43:04"},
+  {"transFrom": "What time is it?", "transTo": "Que hora es?", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-25 10:56:40"},
+  {"transFrom": "Goodbye", "transTo": "Adios", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-25 10:49:09"},
+  {"transFrom": "It's tea time", "transTo": "Es hora del te", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-25 10:47:30"}
 ];
 
-// Future<void> nextTranslate(List<Translate> translations) async {
-//     final directory = await getApplicationDocumentsDirectory();
-//     final filePath = '${directory.path}/SampleReinforce';
-//     final file = File(filePath);
-//     String response = await file.readAsString();
-
-//     List<String> lines = response.split('\n');
-//     for (String line in lines) {
-//       if (line.trim().isEmpty) continue; // Skip empty lines
-//       List<String> parts = line.split('.');
-//       if (parts.length == 3) {
-//         reinforceList.add(ReinforceVocab(parts[0].trim(), parts[1].trim(),parts[2].trim()));
-//       }
-//     }
-//     //Bounds checking, no more than five cards
-//     while(num_of_reinforce_cards < reinforceList.length && num_of_reinforce_cards < 5) {
-//       num_of_reinforce_cards++;
-//     }
-//     setState(() {});
-//   }
-
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -52,7 +31,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final TimeOfDay t = TimeOfDay.fromDateTime(DateTime.parse(translations[0]['date']!));
+  final String d = DateFormat('EEEE, MMM d, yyyy').format(DateTime.parse(translations[0]['date']!));
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +43,55 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            for (var i in translations)
-              log(context, i)
+            SizedBox(height: 10),
+            Text(
+              d,
+              style: const TextStyle(
+                color: Color.fromARGB(255, 56, 78, 52),
+                fontSize: 20,
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Card(
+                clipBehavior: Clip.hardEdge,
+                child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: SizedBox(
+                      width: 350,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Translated (${translations[0]['langTo']}): ${translations[0]['transTo']}',
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            'From (${translations[0]['langFrom']}): ${translations[0]['transFrom']}',
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            t.format(context),
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            for (var i=1; i<translations.length; i++)
+              log(context, translations[i], translations[i-1])
           ],
         ),
       ),
@@ -71,61 +99,109 @@ class HomePage extends StatelessWidget {
   }
 }
 
-Widget log(BuildContext context, String translation) {
-  List<String> parts = translation.split(', ');
-  if (parts.length != 6) return Container(); 
-  
-  String transFrom = parts[0].trim();
-  String transTo = parts[1].trim();
-  String langFrom = parts[2].trim();
-  String langTo = parts[3].trim();
-  String time = parts[4].trim();
-  String date = parts[5].trim();
+Widget log(BuildContext context, Map<String, String> translation, Map<String, String> prev) {
+  DateTime dateTime = DateTime.parse(translation['date']!);
+  DateTime prevDateTime = DateTime.parse(prev['date']!);
 
-  return Column(
-    children: [
-      const SizedBox(height: 10),
-      Align(
-        alignment: Alignment.center,
-        child: Card(
-          clipBehavior: Clip.hardEdge,
-          child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
+  TimeOfDay time = TimeOfDay.fromDateTime(dateTime);
+  String date = DateFormat('EEEE, MMM d, yyyy').format(dateTime);
+  String prevDate = DateFormat('EEEE, MMM d, yyyy').format(prevDateTime);
+
+  if(prevDate == date){
+    return Column(
+      children: [
+        const SizedBox(height: 10),
+        Align(
+          alignment: Alignment.center,
+          child: Card(
+            clipBehavior: Clip.hardEdge,
             child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: SizedBox(
-                width: 350,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Translated ($langTo): $transTo',
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 20,
+                padding: const EdgeInsets.all(15),
+                child: SizedBox(
+                  width: 350,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Translated (${translation['langTo']}): ${translation['transTo']}',
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'From ($langFrom): $transFrom',
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 20,
+                      Text(
+                        'From (${translation['langFrom']}): ${translation['transFrom']}',
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'Time: $time',
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 20,
+                      Text(
+                        time.format(context),
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+  else {
+    return Column(
+      children: [
+        const SizedBox(height: 10),
+        Text(
+          date,
+          style: const TextStyle(
+            color: Color.fromARGB(255, 56, 78, 52),
+            fontSize: 20,
+          ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Card(
+            clipBehavior: Clip.hardEdge,
+            child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: SizedBox(
+                  width: 350,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Translated (${translation['langTo']}): ${translation['transTo']}',
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        'From (${translation['langFrom']}): ${translation['transFrom']}',
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        time.format(context),
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                 ),
               ),
             ),
           ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }
