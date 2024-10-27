@@ -70,7 +70,7 @@ class Hello extends StatelessWidget {
                 child: const Text(
                   'Return to Home',
                   style: TextStyle(
-                      color: const Color.fromARGB(255, 186, 229, 179),
+                      color: Color.fromARGB(255, 186, 229, 179),
                       fontSize: 25),
                 ),
               ),

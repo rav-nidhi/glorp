@@ -142,29 +142,6 @@ class HomePage extends StatelessWidget {
                         ),
                       ))),
             ),
-            spacer,
-            Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 56, 78, 52),
-                  borderRadius: BorderRadius.circular(20)),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => HomePage()));
-                },
-                child: const Text(
-                  'Return to Home',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 186, 229, 179), fontSize: 25),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 130,
-            ),
-            const Text("")
           ],
         ),
       ),
