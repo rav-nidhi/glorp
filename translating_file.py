@@ -172,6 +172,7 @@ def robot_reply(text):
                     data.append(entry)
                 if entry:
                     logger_entry.data_entry(data)
+                    # logger_entry.data_ret()
                 robot_talk('en', 'It was a pleasure to do the translation job.')
                 break
 

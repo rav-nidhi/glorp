@@ -3,11 +3,31 @@ import 'package:intl/intl.dart';
 import 'dart:core';
 
 List<Map<String, String>> translations = [
-  {"transFrom": "Hello", "transTo": "Hola", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-26 23:43:16"},
-  {"transFrom": "My name is glorp", "transTo": "Me llamo glorp", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-26 10:43:25"},
-  {"transFrom": "What day is it?", "transTo": "Que dia es hoy?", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-26 09:43:04"},
-  {"transFrom": "What time is it?", "transTo": "Que hora es?", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-25 10:56:40"},
-  {"transFrom": "Goodbye", "transTo": "Adios", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-25 10:49:09"},
+  {"transFrom":"i'm just going to let it do once and then",
+        "transTo":"Solo lo dejaré hacer una vez y luego",
+        "langFrom":"en",
+        "langTo":"es",
+        "date":"2024-10-27 09:40:13"},
+  {"transFrom":"what's your favorite color",
+        "transTo":"¿Cuál es tu color favorito?",
+        "langFrom":"en",
+        "langTo":"es",
+        "date":"2024-10-27 09:41:33"},
+  {"transFrom":"i believe purple or red",
+        "transTo":"Creo que morado o rojo",
+        "langFrom":"en",
+        "langTo":"es",
+        "date":"2024-10-27 09:41:41"},
+  {"transFrom":"what about you",
+        "transTo":"qué pasa contigo",
+        "langFrom":"en",
+        "langTo":"es",
+        "date":"2024-10-27 09:41:47"},
+  {"transFrom":"what about you",
+        "transTo":"qué pasa contigo",
+        "langFrom":"en",
+        "langTo":"es",
+        "date":"2024-10-27 09:41:47"},
   {"transFrom": "It's tea time", "transTo": "Es hora del te", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-23 10:47:30"}
 ];
 

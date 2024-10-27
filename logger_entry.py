@@ -14,3 +14,8 @@ def data_entry(data):
     print(data)
     result = collection.insert_many(data)
     print("done")
+
+def data_ret():
+    docs = collection.find(True)
+    f = open('data.json', 'w')
+    print(docs, file=f)
