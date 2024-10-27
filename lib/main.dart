@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'dart:async';
 import 'dart:core';
 import 'display.dart';
 
@@ -12,13 +10,11 @@ class Translate {
   Translate(this.transFrom, this.transTo, this.date);
 }
 
-const List<String> translations = [
+List<String> translations = [
   "Hello, Hola, 10/26/2024",
   "My name is glorp, Me llamo glorp, 10/26/2024",
   "What day is it?, Que dia es hoy?, 10/26/2024",
-  "What time is it?",
-  "Que hora es?",
-  "10/26/2024",
+  "What time is it?, Que hora es?, 10/26/2024",
   "Goodbye, Adios, 10/26/2024"
 ];
 
@@ -48,10 +44,12 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Menk Travel Log',
+      title: 'glorp logger',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
@@ -61,90 +59,54 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    const spacer = SizedBox(height: 30);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 186, 229, 179),
       appBar: AppBar(title: const Text('glorp logs')),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            spacer,
-            Align(
-              alignment: Alignment.center,
-              child: Card(
-                clipBehavior: Clip.hardEdge,
-                child: InkWell(
-                    splashColor: Colors.blue.withAlpha(30),
-                    onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (_) => Hello()));
-                    },
-                    child: const Padding(
-                        padding: EdgeInsets.only(left: 20, top: 20),
-                        child: SizedBox(
-                          width: 370,
-                          height: 50,
-                          child: Text(
-                            "Hello, Hola, 10/26/2024",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 0, 0, 0),
-                              fontSize: 20,
-                            ),
-                          ),
-                        ))),
-              ),
-            ),
-            spacer,
-            Card(
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Hello()));
-                  },
-                  child: const Padding(
-                      padding: EdgeInsets.only(left: 20, top: 20),
-                      child: SizedBox(
-                        width: 370,
-                        height: 50,
-                        child: Text(
-                          "Hello, Hola, 10/26/2024",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontSize: 20,
-                          ),
-                        ),
-                      ))),
-            ),
-            spacer,
-            Card(
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Hello()));
-                  },
-                  child: const Padding(
-                      padding: EdgeInsets.only(left: 20, top: 20),
-                      child: SizedBox(
-                        width: 370,
-                        height: 50,
-                        child: Text(
-                          "Hello, Hola, 10/26/2024",
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 0, 0, 0),
-                            fontSize: 20,
-                          ),
-                        ),
-                      ))),
-            ),
+            for (var i in translations)
+              log(context, i)
           ],
         ),
       ),
     );
   }
+}
+
+Widget log(BuildContext context, String i) {
+  return Column (
+    children: [
+      const SizedBox(height:10),
+      Align(
+        alignment: Alignment.center,
+        child: Card(
+        clipBehavior: Clip.hardEdge,
+        child: InkWell(
+          splashColor: Colors.blue.withAlpha(30),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => const Hello()));
+          },
+          child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: SizedBox(
+                width: 350,
+                child: Text(
+                  i,
+                  style: const TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 20,
+                  ),
+                ),
+              )
+            )
+          )
+        ))
+    ]
+  );
 }
