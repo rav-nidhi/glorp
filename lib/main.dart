@@ -8,7 +8,7 @@ List<Map<String, String>> translations = [
   {"transFrom": "What day is it?", "transTo": "Que dia es hoy?", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-26 09:43:04"},
   {"transFrom": "What time is it?", "transTo": "Que hora es?", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-25 10:56:40"},
   {"transFrom": "Goodbye", "transTo": "Adios", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-25 10:49:09"},
-  {"transFrom": "It's tea time", "transTo": "Es hora del te", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-25 10:47:30"}
+  {"transFrom": "It's tea time", "transTo": "Es hora del te", "langFrom": "English", "langTo": "Spanish", "date": "2024-10-23 10:47:30"}
 ];
 
 void main() {
@@ -91,7 +91,9 @@ class HomePage extends StatelessWidget {
             ),
 
             for (var i=1; i<translations.length; i++)
-              log(context, translations[i], translations[i-1])
+              log(context, translations[i], translations[i-1]),
+            
+            SizedBox(height: 10)
           ],
         ),
       ),
